@@ -6,7 +6,6 @@ const intialState = {
 }
 
 //types
-
 export const types = {
     INCREMENT: "INCREMENT",
     DECREMENT: "DECREMENT",
@@ -14,7 +13,6 @@ export const types = {
 }
 
 // reducer
-
 export const TodoReducer = (prevState = intialState, { type, payload }) => {
 
     switch (type) {

@@ -1,13 +1,14 @@
 import React, { useRef } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { types } from '../redux/reducers/todo'
 
-const AddTaskPage = ({ incrementAction }) => {
+const AddTaskPage = () => {
   const inputRef = useRef(0)
+  const call = useDispatch()
 
   const inCrement = () => {
     const incrementValue = inputRef.current.value
-    incrementAction(incrementValue)
+    call({ type: types.INCREMENT, payload: { val: incrementValue } })
   }
 
   return (
@@ -18,11 +19,4 @@ const AddTaskPage = ({ incrementAction }) => {
   )
 }
 
-export default connect(null,
-  (dispatch) => ({
-    incrementAction: (incrementValue) => dispatch({
-      type: types.INCREMENT,
-      payload: { val: Number(incrementValue) }
-    })
-  })
-)(AddTaskPage)
+export default AddTaskPage

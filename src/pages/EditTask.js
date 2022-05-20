@@ -1,13 +1,17 @@
 import React, { useRef } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { types } from '../redux/reducers/todo'
 
-const EditTaskPage = ({ decrementAction }) => {
+const EditTaskPage = () => {
   const inputRef = useRef(0)
+  const call = useDispatch()
 
   const deCrement = () => {
     const decrementValue = inputRef.current.value
-    decrementAction(decrementValue)
+    call({
+      type: types.DECREMENT,
+      payload: { val: decrementValue }
+    })
   }
 
   return (
@@ -18,11 +22,4 @@ const EditTaskPage = ({ decrementAction }) => {
   )
 }
 
-export default connect(null,
-  (dispatch) => ({
-    decrementAction: (x) => dispatch({
-      type: types.DECREMENT,
-      payload: { val: Number(x) }
-    })
-  })
-)(EditTaskPage)
+export default EditTaskPage

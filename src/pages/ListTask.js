@@ -1,32 +1,24 @@
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { types } from '../redux/reducers/todo'
 
-const ListTaskPage = ({ counterProp, resetCounterAction }) => {
+ const ListTaskPage = () => {
+
+  const counter = useSelector(store => store.todo.counter)
+  const call = useDispatch()
+  const handleClick = () => {
+
+    call({ type: types.RESET })
+  }
+
+
   return (
     <div>
-      {counterProp}
-      <button onClick={() => resetCounterAction()}>Reset Counter </button>
+      {counter}
+      <button onClick={handleClick}>Reset Counter </button>
     </div>
   )
 }
 
-// reviewed by arrbouchy : export default connect(
-//   (store)=>({
-//     counterProp : store.todo.counter
-//   })
-// )(ListTaskPage)
 
-
-const f = connect(
-  (store) => ({
-    counterProp: store.todo.counter
-  }),
-  (dispatch) => ({
-    resetCounterAction: () => dispatch({
-      type: types.RESET,
-    })
-  })
-)
-
-export default f(ListTaskPage)
+export default ListTaskPage
