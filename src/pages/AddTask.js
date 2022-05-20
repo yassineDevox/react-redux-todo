@@ -1,6 +1,8 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { types } from '../redux/reducers/todo'
+import { inCrementAction } from '../redux/reducers/todo'
+
+
 
 const AddTaskPage = () => {
   const inputRef = useRef(0)
@@ -8,7 +10,7 @@ const AddTaskPage = () => {
 
   const inCrement = () => {
     const incrementValue = inputRef.current.value
-    call({ type: types.INCREMENT, payload: { val: incrementValue } })
+    call(inCrementAction(incrementValue))
   }
 
   return (

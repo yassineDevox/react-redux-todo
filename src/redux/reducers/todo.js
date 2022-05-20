@@ -12,6 +12,26 @@ export const types = {
     RESET: "RESET",
 }
 
+//actions
+export const resetAction = () => ({
+    type: types.RESET
+})
+
+export const decrementAction = (val) => ({
+    type: types.DECREMENT,
+    payload: { val }
+})
+
+export const inCrementAction = (val) =>
+    ({ type: types.INCREMENT, payload: { val } })
+
+//selector
+export const counterSelector = (store) => {
+    return store.todo.counter
+}
+
+
+
 // reducer
 export const TodoReducer = (prevState = intialState, { type, payload }) => {
 
@@ -19,11 +39,11 @@ export const TodoReducer = (prevState = intialState, { type, payload }) => {
 
         case types.INCREMENT: {
 
-           return  { counter: prevState.counter + payload.val }
+            return { counter: prevState.counter + Number(payload.val) }
         }
 
         case types.DECREMENT: {
-           return  { counter: prevState.counter - payload.val }
+            return { counter: prevState.counter - Number(payload.val) }
         }
 
         case types.RESET: {

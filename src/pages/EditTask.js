@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { types } from '../redux/reducers/todo'
+import { decrementAction } from '../redux/reducers/todo'
+
 
 const EditTaskPage = () => {
   const inputRef = useRef(0)
@@ -8,10 +9,7 @@ const EditTaskPage = () => {
 
   const deCrement = () => {
     const decrementValue = inputRef.current.value
-    call({
-      type: types.DECREMENT,
-      payload: { val: decrementValue }
-    })
+    call(decrementAction(decrementValue))
   }
 
   return (

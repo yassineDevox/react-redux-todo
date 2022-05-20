@@ -1,17 +1,15 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { types } from '../redux/reducers/todo'
+import { counterSelector, resetAction } from '../redux/reducers/todo'
 
  const ListTaskPage = () => {
 
-  const counter = useSelector(store => store.todo.counter)
+  const counter = useSelector(store => counterSelector(store))
   const call = useDispatch()
   const handleClick = () => {
-
-    call({ type: types.RESET })
+    call(resetAction())
   }
-
-
+  
   return (
     <div>
       {counter}
