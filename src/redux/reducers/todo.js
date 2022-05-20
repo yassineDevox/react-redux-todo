@@ -1,66 +1,30 @@
+import { createSlice } from '@reduxjs/toolkit'
 
+const initialState = { counter: 0 }
 
-//initial State
-const intialState = {
-    counter: 0
+export const counterSelector = (s) => {
+    return s.todo.counter
 }
 
-//types
-export const types = {
-    INCREMENT: "INCREMENT",
-    DECREMENT: "DECREMENT",
-    RESET: "RESET",
-}
-
-//actions
-export const resetAction = () => ({
-    type: types.RESET
+const counterSlice = createSlice({
+    name: 'counter',
+    initialState,
+    reducers: {
+        
+        reset(state,action) {
+            console.log(action)
+            state.counter = 0
+        },
+        increment(state, { payload }) {
+            state.counter = state.counter + payload.val
+        },
+        decrement(state, { payload }) {
+            state.counter = state.counter - payload.val
+        }
+    },
 })
 
-export const decrementAction = (val) => ({
-    type: types.DECREMENT,
-    payload: { val }
-})
-
-export const inCrementAction = (val) =>
-    ({ type: types.INCREMENT, payload: { val } })
-
-//selector
-export const counterSelector = (store) => {
-    return store.todo.counter
-}
-
-
-
-// reducer
-export const TodoReducer = (prevState = intialState, { type, payload }) => {
-
-    switch (type) {
-
-        case types.INCREMENT: {
-
-            return { counter: prevState.counter + Number(payload.val) }
-        }
-
-        case types.DECREMENT: {
-            return { counter: prevState.counter - Number(payload.val) }
-        }
-
-        case types.RESET: {
-            return { counter: 0 }
-        }
-
-        default: return prevState
-    }
-}
-
-// const testStore = createStore(
-//     TodoReducer
-// )
-
-// testStore.dispatch({
-//     type: types.INCREMENT,
-//     payload: { val: 3 }
-// })
-
-
+//for ui components 
+export const { reset, increment, decrement } = counterSlice.actions
+// for redux tk store 
+export const TodoReducer =  counterSlice.reducer
